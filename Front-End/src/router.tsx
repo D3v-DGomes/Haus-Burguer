@@ -1,11 +1,11 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 export const rota = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <Navigate to="/login" replace />,
   },
   {
     path: "/login",

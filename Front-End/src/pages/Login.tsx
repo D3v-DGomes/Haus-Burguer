@@ -1,17 +1,14 @@
 import { useState } from "react";
-import Input from "./components/Input";
+import Input from "../components/Input";
 
-const Register = () => {
-  const [name, setName] = useState("");
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [cep, setCep] = useState("");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    console.log({ name, email, password, confirmPassword, cep });
+    console.log(email);
+    console.log(password);
   }
 
   return (
@@ -20,11 +17,13 @@ const Register = () => {
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col justify-center gap-2">
-        <img src="./logo.png" alt="" className="mb-4" />
-        <Input placeholder="Nome" onChange={(e) => setName(e.target.value)} />
+        <img
+          src="./logo.png"
+          alt=""
+          className="mb-4 w-40 self-center object-contain"
+        />
         <Input
           placeholder="E-mail"
-          type="email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
@@ -32,16 +31,7 @@ const Register = () => {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Input
-          placeholder="Confirmar Senha"
-          type="password"
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <Input
-          placeholder="CEP"
-          type="text"
-          onChange={(e) => setCep(e.target.value)}
-        />
+        <p className="text-white">{email}</p>
         <button className="cursor-pointer rounded-md bg-[#C92A0E] py-2 text-sm font-bold text-white">
           Login
         </button>
@@ -50,4 +40,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

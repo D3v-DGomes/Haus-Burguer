@@ -52,7 +52,9 @@ const Register = () => {
           onChange={(e) => setCep(e.target.value)}
         />
         <Button title="Criar conta" />
-        <Button title="Já tenho uma conta" variant="outline" />
+        <Link to="/login">
+          <Button title="Já tenho uma conta" variant="outline" />
+        </Link>
       </div>
     </form>
   );

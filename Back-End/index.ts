@@ -1,11 +1,18 @@
 import express from "express";
-import { connection } from "./src/db.js";
+import { connection, prisma } from "./src/db.js";
 
 const app = express();
+app.use(express.json());
 connection();
 
-app.get("/", (req, res) => {
-  res.json("Acesso a rota bem sucedido.");
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await prisma.user.findFirst({
+    where: { email: email, password: password },
+  });
+
+  res.json(user);
 });
 
 app.listen(3000, () => {

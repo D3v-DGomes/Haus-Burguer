@@ -8,15 +8,30 @@ app.use(cors());
 connection();
 
 app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  // consulta ao banco de dados usando Prisma
-  const user = await prisma.user.findFirst({
-    where: { email: email, password: password },
-  });
+    if (!email || !password) {
+      res.status(400).json({ message: "E-mail e senha são obrigatórios." });
+      return;
+    }
 
-  // Resposta para o front-end
-  res.json(user);
+    // consulta ao banco de dados usando Prisma
+    const user = await prisma.user.findFirst({
+      where: { email: email, password: password },
+    });
+
+    if (!user) {
+      res.status(404).json({ message: "Usuário não encontrado." });
+      return;
+    }
+
+    // Resposta para o front-end
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Erro no servidor." });
+    return;
+  }
 });
 
 app.listen(3000, () => {

@@ -58,7 +58,7 @@ app.post("/register", async (req: Request, res: Response) => {
       data: { name: name, email: email, password: password, cep: cep },
     });
 
-    res.json(newUser);
+    res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ message: "Erro no servidor" });
   }

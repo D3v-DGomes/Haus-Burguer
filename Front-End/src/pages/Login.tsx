@@ -6,18 +6,38 @@ import Button from "../components/Button";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // requisicao para o back-end
-    const response = await fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-    console.log(data);
+    try {
+      // requisicao para o back-end
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      console.log(response.status);
+
+      if (response.status === 404) {
+        setError("Usuário não encontrado");
+      }
+
+      if (response.status === 400) {
+        setError("Usuário e senha são obrigatórios");
+      }
+
+      if (response.status === 200) {
+        setError("");
+        const data = await response.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   }
 
   return (
@@ -30,19 +50,23 @@ const Login = () => {
           <img
             src="./logo.png"
             alt=""
-            className="mb-4 w-40 self-center object-contain"
+            className="mb-5 w-40 self-center object-contain"
           />
         </Link>
 
-        <Input
-          placeholder="E-mail"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input
-          placeholder="Senha"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="mb-4 flex flex-col gap-2">
+          <Input
+            placeholder="E-mail"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            placeholder="Senha"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <p className="text-sm font-bold text-[#C92A0E]">{error}</p>
+        </div>
 
         <Button title="Login" type="submit" />
         <Link to="/register" className="w-full">

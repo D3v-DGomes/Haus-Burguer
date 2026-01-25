@@ -12,6 +12,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      if (!email || !password) {
+        setError("Usuário e senha são obrigatórios");
+        return;
+      }
+
       // requisicao para o back-end
       const response = await fetch("http://localhost:3000/login", {
         method: "POST",
@@ -57,6 +62,7 @@ const Login = () => {
         <div className="mb-4 flex flex-col gap-2">
           <Input
             placeholder="E-mail"
+            type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input

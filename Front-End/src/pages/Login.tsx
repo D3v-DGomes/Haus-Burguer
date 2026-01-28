@@ -34,6 +34,14 @@ const Login = () => {
         setError("Usuário e senha são obrigatórios");
       }
 
+      if (response.status === 401) {
+        setError("Credenciais inválidas");
+      }
+
+      if (response.status === 500) {
+        setError("Erro no servidor");
+      }
+
       if (response.status === 200) {
         setError("");
         const data = await response.json();

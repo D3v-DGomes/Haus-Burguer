@@ -19,7 +19,7 @@ app.post("/login", async (req: Request, res: Response) => {
 
     // consulta ao banco de dados usando Prisma
     const user = await prisma.user.findFirst({
-      where: { email: email, password: password },
+      where: { email: email },
     });
 
     if (!user) {
@@ -27,8 +27,21 @@ app.post("/login", async (req: Request, res: Response) => {
       return;
     }
 
+    // Comparar a senha fornecida com a senha armazenada
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      res.status(401).json({ message: "E-mail ou senha incorretos." });
+      return;
+    }
+
     // Resposta para o front-end
-    res.status(200).json(user);
+    res.status(200).json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      cep: user.cep,
+    });
   } catch (error) {
     res.status(500).json({ message: "Erro no servidor." });
     return;

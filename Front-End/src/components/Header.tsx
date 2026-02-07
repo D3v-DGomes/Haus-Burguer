@@ -1,15 +1,23 @@
 import { Link } from "react-router";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 const Header = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className="bg-[#161410]">
       <div className="mx-auto flex w-full items-center justify-between p-3 md:w-[737px] md:p-0">
         <img src="./logo.png" alt="" className="p-2" />
 
         <Link to="/login">
-          <div className="flex h-[35px] w-[130px] cursor-pointer items-center justify-center rounded-sm bg-[#F2DAAC] font-semibold">
-            Entrar
-          </div>
+          {user ? (
+            <p className="text-white">Olá, {user.name}</p>
+          ) : (
+            <div className="flex h-[35px] w-[130px] cursor-pointer items-center justify-center rounded-sm bg-[#F2DAAC] font-semibold">
+              Entrar
+            </div>
+          )}
         </Link>
       </div>
     </div>

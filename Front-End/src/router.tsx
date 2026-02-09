@@ -2,6 +2,7 @@ import { createBrowserRouter, Outlet } from "react-router";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import Pedidos from "./pages/Pedidos";
 import Header from "./components/Header";
 
 const Layout = () => {
@@ -20,6 +21,10 @@ export const rota = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/pedidos",
+        element: <Pedidos />,
       },
     ],
   },

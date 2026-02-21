@@ -1,11 +1,33 @@
 import { Link, useLocation } from "react-router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { LogOut, ShoppingCart, Box, LayoutDashboard, Plus } from "lucide-react";
 
 const Header = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const location = useLocation();
+
+  const handleAuthUser = async () => {
+    const response = await fetch("http://localhost:3000/me", {
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      console.log("Usuário não autenticado");
+      return;
+    }
+
+    const data = await response.json();
+    console.log(data);
+    setUser(data);
+
+    console.log(response);
+  };
+
+  useEffect(() => {
+    handleAuthUser();
+  }, [location.pathname]);
+
   const getNavItemClass = (path: string) => {
     const baseClass =
       "flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-md border-1";
@@ -39,7 +61,7 @@ const Header = () => {
                 </div>
               </Link>
 
-              <div className="flex h-[32px] w-[32px] cursor-pointer items-center justify-center rounded-md border-1">
+              <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border">
                 <Plus size={22} />
               </div>
             </div>

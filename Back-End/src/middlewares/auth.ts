@@ -17,6 +17,6 @@ export const authMiddleware = (
     req.user = decoded;
     next();
   } catch (error) {
-    return res.status(401).json({ error: "Usuario nao atenticado" });
+    return res.status(401).json({ error: "Usuario nao autenticado" });
   }
 };

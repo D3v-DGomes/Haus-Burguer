@@ -8,20 +8,44 @@ const Header = () => {
   const location = useLocation();
 
   const handleAuthUser = async () => {
-    const response = await fetch("http://localhost:3000/me", {
-      credentials: "include",
-    });
+    try {
+      const response = await fetch("http://localhost:3000/me", {
+        credentials: "include",
+      });
 
-    if (!response.ok) {
-      console.log("Usuário não autenticado");
+      if (response.status !== 200) {
+        console.log("Usuário não autenticado");
+        return;
+      }
+
+      const data = await response.json();
+      // console.log(data);
+      setUser(data);
+
+      // console.log(response);
+    } catch (error) {
+      console.log(error);
       return;
     }
+  };
 
-    const data = await response.json();
-    console.log(data);
-    setUser(data);
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/logout", {
+        credentials: "include",
+        method: "POST",
+      });
 
-    console.log(response);
+      if (!response.ok) {
+        console.log("Erro ao fazer logout");
+        return;
+      }
+
+      setUser(null);
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   };
 
   useEffect(() => {
@@ -75,7 +99,11 @@ const Header = () => {
 
             <div className="flex items-center gap-2">
               <p>Olá, {user.name.split(" ")[0]}</p>
-              <LogOut size={22} className="cursor-pointer" />
+              <LogOut
+                size={22}
+                className="cursor-pointer"
+                onClick={() => handleLogout()}
+              />
             </div>
           </p>
         ) : (

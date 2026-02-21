@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { prisma } from "../db.js";
 import bcrypt from "bcrypt";
-import jsonwebtoken from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -42,12 +42,12 @@ export const login = async (req: Request, res: Response) => {
       return;
     }
 
-    const token = jsonwebtoken.sign(userInfos, process.env.JWT_SECRET);
+    const token = jwt.sign(userInfos, process.env.JWT_SECRET);
     console.log("Token JWT:", token);
 
     // Inserindo cookies:
     res.cookie("user", token, {
-      maxAge: 30 * 1000,
+      maxAge: 1800000, // 5 horas
     });
 
     // Resposta para o front-end
@@ -88,5 +88,26 @@ export const register = async (req: Request, res: Response) => {
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ message: "Erro no servidor" });
+  }
+};
+
+export const auth = async (req: Request, res: Response) => {
+  try {
+    const token = req.cookies.user;
+
+    if (!process.env.JWT_SECRET) {
+      return;
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (!decoded) {
+      res.status(401).json({ message: "Usuário não autenticado" });
+      return;
+    }
+
+    res.status(200).json(decoded);
+  } catch (error) {
+    res.status(500).json({ message: "Erro no servidor" });
+    return;
   }
 };

@@ -64,37 +64,39 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-[#161410]">
+    <header className="bg-[#161410]">
       <div className="mx-auto flex w-full items-center justify-between p-3 md:w-184.25 md:p-0">
         <Link to="/">
-          <img src="./logo.png" alt="" className="p-2" />
+          <img src="./logo.png" alt="Logo da Empresa" className="p-2" />
         </Link>
 
         {user ? (
-          <p className="flex items-center gap-8 text-white">
-            <div className="flex items-center gap-2 text-[#F2DAAC]">
-              <Link to="/">
-                <div className={getNavItemClass("/")}>
-                  <Box size={22} />
-                </div>
-              </Link>
+          <nav className="flex items-center gap-8 text-white">
+            {user.admin && (
+              <div className="flex items-center gap-2 text-[#F2DAAC]">
+                <Link to="/">
+                  <div className={getNavItemClass("/")}>
+                    <Box size={22} />
+                  </div>
+                </Link>
 
-              <Link to="/pedidos">
-                <div className={getNavItemClass("/pedidos")}>
-                  <LayoutDashboard size={22} />
-                </div>
-              </Link>
+                <Link to="/pedidos">
+                  <div className={getNavItemClass("/pedidos")}>
+                    <LayoutDashboard size={22} />
+                  </div>
+                </Link>
 
-              <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border">
-                <Plus size={22} />
+                <div className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border">
+                  <Plus size={22} />
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="relative cursor-pointer">
               <ShoppingCart size={22} />
-              <p className="absolute -top-4 -right-4 flex h-5 w-5 items-center justify-center rounded-full bg-[#F2DAAC] p-1 text-[#161410]">
+              <span className="absolute -top-4 -right-4 flex h-5 w-5 items-center justify-center rounded-full bg-[#F2DAAC] p-1 text-xs text-[#161410]">
                 1
-              </p>
+              </span>
             </div>
 
             <div className="flex items-center gap-2">
@@ -105,7 +107,7 @@ const Header = () => {
                 onClick={() => handleLogout()}
               />
             </div>
-          </p>
+          </nav>
         ) : (
           <Link to="/login">
             <div className="flex h-8.75 w-32.5 cursor-pointer items-center justify-center rounded-sm bg-[#F2DAAC] font-semibold">
@@ -114,7 +116,7 @@ const Header = () => {
           </Link>
         )}
       </div>
-    </div>
+    </header>
   );
 };
 

@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Pedidos from "./pages/Pedidos";
 import Header from "./components/Header";
+import PublicRoute from "./components/PublicRoute";
 
 const Layout = () => {
   return (
@@ -35,10 +36,18 @@ export const rota = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <PublicRoute>
+        <Login />
+      </PublicRoute>
+    ),
   },
   {
     path: "/register",
-    element: <Register />,
+    element: (
+      <PublicRoute>
+        <Register />
+      </PublicRoute>
+    ),
   },
 ]);

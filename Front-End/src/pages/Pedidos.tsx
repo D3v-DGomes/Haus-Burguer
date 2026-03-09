@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { User, CalendarDays, ClockAlert, ClockCheck } from "lucide-react";
+import CardPedido from "../components/CardPedido";
 
 const Pedidos = () => {
   const [category, setCategory] = useState("Pendente");
@@ -45,120 +45,14 @@ const Pedidos = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-2 md:gap-3">
-        <div className="rounded-md bg-[#F2DAAC] p-2 text-[#32343E]">
-          <div className="flex justify-between font-bold">
-            <p>#1</p>
-            <select name="" id="">
-              <option value="" defaultChecked disabled>
-                Pendente
-              </option>
-              <option value="">Retirado</option>
-              <option value="">Cancelado</option>
-            </select>
-          </div>
-
-          <div className="mt-2 flex flex-col gap-2 text-[#32343E]">
-            <div className="flex items-center gap-2">
-              <User size={16} strokeWidth={3} />
-              <p className="text-sm">David Gomes</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <CalendarDays size={16} strokeWidth={3} />
-              <p className="text-sm">09/03/2026</p>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex items-center gap-2">
-                <ClockAlert size={16} strokeWidth={3} />
-                <p className="text-sm">18:00</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <ClockCheck size={16} strokeWidth={3} />
-                <p className="text-sm">18:32</p>
-              </div>
-            </div>
-
-            <div className="h-px w-full bg-[#32343E]"></div>
-
-            <p className="text-md text-right font-bold">R$133,90</p>
-          </div>
-        </div>
-        <div className="rounded-md bg-[#F2DAAC] p-2 text-[#32343E]">
-          <div className="flex justify-between font-bold">
-            <p>#1</p>
-            <select name="" id="">
-              <option value="" defaultChecked disabled>
-                Pendente
-              </option>
-              <option value="">Retirado</option>
-              <option value="">Cancelado</option>
-            </select>
-          </div>
-
-          <div className="mt-2 flex flex-col gap-2 text-[#32343E]">
-            <div className="flex items-center gap-2">
-              <User size={16} strokeWidth={3} />
-              <p className="text-sm">David Gomes</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <CalendarDays size={16} strokeWidth={3} />
-              <p className="text-sm">09/03/2026</p>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex items-center gap-2">
-                <ClockAlert size={16} strokeWidth={3} />
-                <p className="text-sm">18:00</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <ClockCheck size={16} strokeWidth={3} />
-                <p className="text-sm">18:32</p>
-              </div>
-            </div>
-
-            <div className="h-px w-full bg-[#32343E]"></div>
-
-            <p className="text-md text-right font-bold">R$133,90</p>
-          </div>
-        </div>
-        <div className="rounded-md bg-[#F2DAAC] p-2 text-[#32343E]">
-          <div className="flex justify-between font-bold">
-            <p>#1</p>
-            <select name="" id="">
-              <option value="" defaultChecked disabled>
-                Pendente
-              </option>
-              <option value="">Retirado</option>
-              <option value="">Cancelado</option>
-            </select>
-          </div>
-
-          <div className="mt-2 flex flex-col gap-2 text-[#32343E]">
-            <div className="flex items-center gap-2">
-              <User size={16} strokeWidth={3} />
-              <p className="text-sm">David Gomes</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <CalendarDays size={16} strokeWidth={3} />
-              <p className="text-sm">09/03/2026</p>
-            </div>
-
-            <div className="flex gap-6">
-              <div className="flex items-center gap-2">
-                <ClockAlert size={16} strokeWidth={3} />
-                <p className="text-sm">18:00</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <ClockCheck size={16} strokeWidth={3} />
-                <p className="text-sm">18:32</p>
-              </div>
-            </div>
-
-            <div className="h-px w-full bg-[#32343E]"></div>
-
-            <p className="text-md text-right font-bold">R$133,90</p>
-          </div>
-        </div>
+        <CardPedido
+          id={2}
+          name="D. Gomes"
+          date="09/03/2026"
+          orderTime="18:00"
+          deliveredAt="18:32"
+          total={132.9}
+        />
       </div>
     </div>
   );

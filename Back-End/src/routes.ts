@@ -12,4 +12,4 @@ router.get("/me", authMiddleware, auth);
 router.post("/logout", authMiddleware, logout);
 
 // Rota de produto
-router.get("/get-product", getProducts);
+router.get("/get-products", getProducts);

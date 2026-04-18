@@ -3,16 +3,7 @@ import { prisma } from "../db.js";
 
 export const getProducts = async (req: Request, res: Response) => {
   try {
-    const products = await prisma.product.findMany({
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        price: true,
-        img: true,
-        createdAt: true,
-      },
-    });
+    const products = await prisma.product.findMany();
 
     if (products.length === 0) {
       res.status(404).json({ message: "Não foram encontrados produtos" });

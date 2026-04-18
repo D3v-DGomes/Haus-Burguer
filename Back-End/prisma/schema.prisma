@@ -17,10 +17,11 @@ model User {
 }
 
 model Product {
-  id String @id @default(cuid())
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name String
   description String
   price Int
+  category String 
   img String
   createdAt DateTime @default(now())
 }

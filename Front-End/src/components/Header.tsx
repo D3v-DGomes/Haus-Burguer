@@ -1,9 +1,11 @@
 import { Link, useLocation } from "react-router";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { LogOut, ShoppingCart, Box, LayoutDashboard, Plus } from "lucide-react";
+import Cart from "./Cart";
 
 const Header = () => {
+  const [showCart, setShowCart] = useState<boolean>(false); // Estado para controlar a exibição do carrinho
   const { user, setUser } = useContext(UserContext);
   const location = useLocation();
 
@@ -65,6 +67,9 @@ const Header = () => {
 
   return (
     <header className="bg-[#161410]">
+      {/* Renderiza o componente Cart quando showCart for true */}
+      {showCart && <Cart showCart={showCart} setShowCart={setShowCart} />}{" "}
+      {/* Passa as props showCart e setShowCart para o componente Cart */}
       <div className="mx-auto flex w-full items-center justify-between p-3 md:w-184.25 md:p-0">
         <Link to="/">
           <img src="./logo.png" alt="Logo da Empresa" className="p-2" />
@@ -93,7 +98,8 @@ const Header = () => {
             )}
 
             <div className="relative cursor-pointer">
-              <ShoppingCart size={22} />
+              {/* Alterna a exibição do carrinho ao clicar no ícone */}
+              <ShoppingCart size={22} onClick={() => setShowCart(!showCart)} />
               <span className="absolute -top-4 -right-4 flex h-5 w-5 items-center justify-center rounded-full bg-[#F2DAAC] p-1 text-xs text-[#161410]">
                 1
               </span>

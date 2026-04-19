@@ -62,7 +62,11 @@ const Product = ({
         <div className="flex w-full flex-col">
           <div className="flex items-center justify-between">
             <p className="text-sm font-bold uppercase md:text-lg">
-              {name} <span className="text-xs opacity-70">({category})</span>
+              {name}
+              {"   "}
+              <a className="text-xs font-semibold text-[#848484]">
+                ({category})
+              </a>
             </p>
             {user?.admin && (
               <div

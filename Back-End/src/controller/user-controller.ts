@@ -44,7 +44,7 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign(userInfos, process.env.JWT_SECRET);
-    console.log("Token JWT:", token);
+    // console.log("Token JWT:", token);
 
     // Inserindo cookies:
     res.cookie("user", token, {

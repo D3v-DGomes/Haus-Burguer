@@ -3,10 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { LogOut, ShoppingCart, Box, LayoutDashboard, Plus } from "lucide-react";
 import Cart from "./Cart";
+import { CartItemContext } from "../contexts/CartItemsContext";
 
 const Header = () => {
   const [showCart, setShowCart] = useState<boolean>(false); // Estado para controlar a exibição do carrinho
   const { user, setUser } = useContext(UserContext);
+  const { cartItems } = useContext(CartItemContext);
   const location = useLocation();
 
   const handleAuthUser = async () => {
@@ -101,7 +103,7 @@ const Header = () => {
               {/* Alterna a exibição do carrinho ao clicar no ícone */}
               <ShoppingCart size={22} onClick={() => setShowCart(!showCart)} />
               <span className="absolute -top-4 -right-4 flex h-5 w-5 items-center justify-center rounded-full bg-[#F2DAAC] p-1 text-xs text-[#161410]">
-                1
+                {cartItems.length}
               </span>
             </div>
 

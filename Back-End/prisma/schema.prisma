@@ -41,3 +41,11 @@ model CartItem {
   userId    String  @db.Uuid
   user      User    @relation(fields: [userId], references: [id])
 }
+
+
+// Como fazer a relação entre o User e o Product?
+// A relação entre User e Product é feita através do modelo CartItem, que atua como umatabela de junção (join table) entre os dois modelos. Cada CartItem representa um item no carrinho de um usuário, associando um produto específico a um usuário específico.
+// No modelo CartItem, temos os campos productId e userId, que são chaves estrangeiras referenciando os modelos Product e User, respectivamente. Através dessas chaves estrangeiras, podemos estabelecer a relação entre os usuários e os produtos que eles adicionaram ao carrinho.
+// Comando para ver a tabela no banco de dados:
+//SELECT "CartItem".*, "Product".* FROM "CartItem" INNER JOIN "Product" ON "CartItem"."productId" = "Product"."id"
+
